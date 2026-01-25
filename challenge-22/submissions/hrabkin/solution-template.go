@@ -30,20 +30,16 @@ func main() {
 // If the amount cannot be made with the given denominations, return -1.
 func MinCoins(amount int, denominations []int) int {
 	
-	var count = 0
-	n := len(denominations)
-	res := amount
+	var count int
+	n,res := len(denominations),amount
 	for i,_ := range denominations {
         if res == 0 { return count }
         d := denominations[n - 1 - i]
-        q := res / d
-        r := res % d
+        q,r := res / d, res % d
         count += q
         res = r
     }
-    if res > 0 {
-        return -1
-    }
+    if res > 0 { return -1 }
 	
 	return count
 }
@@ -56,15 +52,12 @@ func CoinCombination(amount int, denominations []int) map[int]int {
     
     var comb map[int]int = make(map[int]int)
     var count int
-    
-	n := len(denominations)
-	res := amount
+	n,res := len(denominations),amount
 	
 	for i,_ := range denominations {
         if res == 0 { return comb }
         d := denominations[n - 1 - i]
-        q := res / d
-        r := res % d
+        q,r := res / d, res % d
         count += q
         res = r
         if q > 0 {
